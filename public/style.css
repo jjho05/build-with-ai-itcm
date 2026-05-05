@@ -1215,72 +1215,62 @@ p, label, input, textarea, button {
     }
 }
 
-/* Footer Institucional */
+/* Footer */
 .footer {
     background: var(--card-bg);
     border-top: 1px solid var(--border);
-    padding: 4rem 2rem 2rem;
+    padding: 4rem 2rem;
     margin-top: 4rem;
+    text-align: center;
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.footer-brand {
-    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
 }
 
 .footer-logo {
     height: 24px;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--google-blue);
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
 }
 
-.footer-brand p {
-    color: var(--text-main);
-    font-weight: 600;
+.creator {
+    opacity: 0.6;
+    font-size: 0.8rem !important;
 }
 
-.footer-institution {
-    text-align: right;
-}
-
-.footer-institution p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-.tagline {
-    font-style: italic;
-    color: var(--google-blue) !important;
-    margin-top: 0.25rem;
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-}
-
-@media (max-width: 768px) {
-    .footer-content {
+@media (max-width: 600px) {
+    .footer-links {
+        gap: 1rem;
         flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-    .footer-institution {
-        text-align: center;
     }
 }
