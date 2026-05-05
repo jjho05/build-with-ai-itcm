@@ -221,6 +221,7 @@ Instituto Tecnológico de Ciudad Madero
 
 - **Portal ISC-ITCM:** [jjho05.github.io/ISC-ITCM/](https://jjho05.github.io/ISC-ITCM/)  
 - **GitHub:** [@jjho05](https://github.com/jjho05)
+- **Email:** [jjho.reivaj05@gmail.com](mailto:jjho.reivaj05@gmail.com)
 
 ---
 
