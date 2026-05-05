@@ -24,17 +24,18 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 class AIRequestHandler {
     constructor(payload) {
+        this.type = payload.type || 'PROPUESTA'; // PROPUESTA or CONTACTO
         this.userName = payload.name;
         this.userEmail = payload.email;
-        this.projectTitle = payload.title;
-        this.rawProposal = payload.proposal;
+        this.title = payload.title || payload.subject || "Sin título";
+        this.rawProposal = payload.proposal || payload.message;
         this.sanitizedProposal = "";
         this.wordCount = 0;
         this.timestamp = new Date().toISOString();
     }
 
     sanitize() {
-        const cleanText = this.rawProposal
+        const cleanText = (this.rawProposal || "")
             .replace(/<[^>]*>?/gm, '')
             .replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\.,!?]/g, '')
             .trim();
@@ -49,40 +50,43 @@ class AIRequestHandler {
     }
 
     isValid() {
+        // Contact messages don't need min 10 words, proposals do
+        if (this.type === 'CONTACTO') return this.wordCount > 0;
         return this.wordCount >= 10;
     }
 
     getData() {
         return {
+            type: this.type,
             author: this.userName,
             email: this.userEmail,
-            title: this.projectTitle,
+            title: this.title,
             proposal: this.sanitizedProposal,
             metadata: {
                 words: this.wordCount,
                 processedAt: this.timestamp,
-                status: "Ready for Gemini"
+                status: "Processed"
             }
         };
     }
 }
 
 /**
- * Endpoint: Submit Proposal
+ * Endpoint: Submit Proposal / Contact
  */
 app.post('/api/submit', async (req, res) => {
     try {
-        const { name, email, title, proposal } = req.body;
-        const handler = new AIRequestHandler({ name, email, title, proposal });
+        const handler = new AIRequestHandler(req.body);
         handler.sanitize();
         const count = handler.calculateWordCount();
 
         if (!handler.isValid()) {
+            const minWords = handler.type === 'CONTACTO' ? 1 : 10;
             return res.status(400).json({
-                error: `La propuesta es demasiado corta (${count} palabras). Mínimo 10 palabras.`
+                error: `El mensaje es demasiado corto (${count} palabras). Mínimo ${minWords} palabras.`
             });
         }
-        console.log(`[PROPOSAL RECEIVED] From: ${handler.userEmail} - Title: ${handler.projectTitle}`);
+        console.log(`[${handler.type} RECEIVED] From: ${handler.userEmail}`);
 
         // --- GOOGLE SHEETS INTEGRATION ---
         const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
@@ -93,25 +97,32 @@ app.post('/api/submit', async (req, res) => {
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        type: handler.type,
                         name: handler.userName,
                         email: handler.userEmail,
-                        title: handler.projectTitle,
-                        proposal: handler.sanitizedProposal
+                        title: handler.title,
+                        proposal: handler.sanitizedProposal,
+                        timestamp: handler.timestamp
                     })
                 });
-                console.log("✅ Data sent to Google Sheets");
+                console.log(`✅ ${handler.type} sent to Google Sheets`);
             } catch (sheetError) {
                 console.error("❌ Error sending to Google Sheets:", sheetError.message);
             }
         }
 
+        const successMsg = handler.type === 'CONTACTO' 
+            ? `¡Gracias ${handler.userName}! Tu mensaje ha sido enviado al equipo del ITCM.`
+            : `¡Gracias ${handler.userName}! Tu propuesta '${handler.title}' ha sido recibida. El comité del ITCM la revisará pronto.`;
+
         res.json({ 
-            message: `¡Gracias ${handler.userName}! Tu propuesta '${handler.projectTitle}' ha sido recibida. El comité del Instituto Tecnológico de Ciudad Madero la revisará pronto.`,
+            message: successMsg,
             status: "Success"
         });
 
     } catch (err) {
-        res.status(500).json({ error: "Error interno al procesar la propuesta." });
+        console.error("Submit Error:", err);
+        res.status(500).json({ error: "Error interno al procesar la solicitud." });
     }
 });
 

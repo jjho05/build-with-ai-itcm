@@ -1,112 +1,101 @@
-# Build with AI - ITCM 2026
-## Programación Web [AEB-1055] - Proyecto de Innovación con IA
+# 🚀 Build with AI - ITCM 2026
+## Programación Web [AEB-1055] - Plataforma de Innovación Institucional
 
 ---
 
-## 📖 Introducción
+## 📖 Introducción y Visión del Proyecto
 
-Bienvenido al repositorio **Build with AI - ITCM 2026**, una plataforma de vanguardia diseñada para la gestión de propuestas tecnológicas en el marco de la gira oficial de **Google Developers**. Este proyecto no solo cumple con los requerimientos académicos de la materia de **Programación Web**, sino que integra tecnologías de inteligencia artificial de última generación para potenciar la comunidad del **Instituto Tecnológico de Ciudad Madero**.
+Bienvenido al repositorio **Build with AI - ITCM 2026**, una plataforma de grado industrial diseñada para la gestión, captura y validación de propuestas tecnológicas en el marco de la gira oficial de **Google Developers**. 
 
-### ¿Qué es este proyecto?
+Este proyecto trasciende el ámbito académico de la materia de **Programación Web**, posicionándose como una herramienta soberana para la comunidad del **Instituto Tecnológico de Ciudad Madero**. Integra lo último en Inteligencia Artificial Generativa con una arquitectura robusta y una experiencia de usuario de nivel premium.
 
-Este sistema es una aplicación Full-Stack que permite:
-- ✅ **Recepción de Propuestas:** Interfaz premium para la captura de ideas innovadoras.
-- ✅ **Asistente Inteligente:** Integración con **Google Gemini** para asistencia en tiempo real mediante un chatbot especializado.
-- ✅ **Arquitectura Segura:** Implementación de un Proxy en Node.js para la protección de llaves de API (Seguridad de Grado Industrial).
-- ✅ **UX/UI de Google:** Diseño alineado con los estándares de **Material Design 3** y la estética minimalista de Google.
-
-### ¿Para quién es?
-
-- **Estudiantes del ITCM** que deseen participar en la gira "Build with AI".
-- **Desarrolladores** interesados en la integración segura de modelos de lenguaje (LLMs) en entornos productivos.
-- **Comunidad TecNM** que busca ejemplos de aplicaciones web modernas, seguras y estéticas.
+### 🌟 Pilares del Proyecto
+- **Innovación con IA:** Integración nativa con **Google Gemini** para asistencia técnica y estratégica.
+- **Excelencia en UX/UI:** Implementación rigurosa de **Material Design 3** con estética Google-First.
+- **Soberanía de Datos:** Pipeline completo desde la captura hasta el almacenamiento en **Google Sheets**.
+- **Seguridad Proactiva:** Protección de activos críticos mediante arquitectura Proxy y variables de entorno.
 
 ---
 
-## 🌐 Identidad Institucional y Ecosistema
+## 💎 Características Principales (Full Suite)
 
-Este proyecto es una pieza clave en el ecosistema digital de la carrera de **Ingeniería en Sistemas Computacionales** del **Instituto Tecnológico de Ciudad Madero (ITCM)**.
+### 1. Sistema de Captura Inteligente
+- **Validación en Tiempo Real:** Barra de progreso dinámica para el conteo de palabras (mínimo 10 para calidad).
+- **Draft Persistence:** Uso de `localStorage` para que los estudiantes nunca pierdan su progreso ante recargas accidentales.
+- **Sugerencias Dinámicas:** Contenedor de "AI Tips" que rota automáticamente consejos para mejorar las propuestas.
 
-### 🏫 El Portal Oficial de la Carrera (ISC-ITCM)
-Para una experiencia visual e institucional completa, visita el portal:
+### 2. Gemini Assistant (Chatbot 2.0)
+- **Skeleton Loading:** Interfaz reactiva con estados de carga que mejoran la percepción de velocidad.
+- **Inferencia en Tiempo Real:** Conectado a Gemini 1.5 Flash para respuestas precisas y profesionales.
+- **Seguridad de Grado Industrial:** Las peticiones se procesan en el backend, manteniendo la API Key oculta del navegador.
+
+### 3. Google Integration & Webhooks
+- **Sincronización Automática:** Cada propuesta enviada se registra instantáneamente en una hoja de **Google Sheets** mediante un Webhook asíncrono.
+- **Diferenciación de Datos:** El sistema distingue automáticamente entre "Propuestas de Proyecto" y "Mensajes de Contacto".
+
+### 4. Estética Disruptiva y Moderna
+- **Google Top Loader:** Barra de carga superior que alterna los 4 colores icónicos durante procesos asíncronos.
+- **Scroll Reveal:** Animaciones de entrada suaves que dotan a la página de dinamismo al navegar.
+- **Modo Oscuro Nativo:** Soporte completo para temas claro y oscuro, respetando las preferencias del sistema del usuario.
+- **Countdown Timer:** Contador regresivo minimalista hacia la fecha del evento (20 de Mayo).
+
+---
+
+## 🏛️ Identidad Institucional y Ecosistema
+
+Este proyecto es una extensión de la visión de excelencia del **Instituto Tecnológico de Ciudad Madero (ITCM)**.
+
+### 🏫 Ecosistema ISC-ITCM
+Este sitio está diseñado para coexistir con el portal oficial de la carrera:
 **👉 [jjho05.github.io/ISC-ITCM/](https://jjho05.github.io/ISC-ITCM/)**
 
 > [!IMPORTANT]
-> **Reconocimiento y Autoría:**  
-> El portal **ISC-ITCM** fue diseñado y desarrollado por **Jesús Olvera** como una iniciativa para profesionalizar la identidad digital de nuestra carrera. Este proyecto "Build with AI" se alinea con esa visión de excelencia técnica e institucional.
+> **Autoría y Liderazgo Técnico:**  
+> Ambos proyectos (ISC-ITCM y Build with AI) han sido diseñados y desarrollados por **Jesús Olvera** como parte de una iniciativa personal y académica para modernizar la infraestructura digital de la carrera de Ingeniería en Sistemas Computacionales.
 
 ---
 
-## 🧠 Fundamentos Técnicos (Auditoría de IA)
+## 🧠 Auditoría Técnica y Arquitectura
 
-Como parte de los requerimientos de la materia, se documentan los siguientes pilares de la arquitectura:
+### Arquitectura de Sistemas
+- **Backend:** Node.js + Express (Serverless ready para Vercel).
+- **Seguridad:** Implementación de CORS, sanitización de inputs y manejo de errores asíncronos.
+- **OOP Pattern:** Uso de la clase `AIRequestHandler` en el servidor para el procesamiento modular de datos.
+- **Frontend:** HTML5 Semántico, CSS3 Moderno (Variables, Flex, Grid) y JavaScript ES6+.
 
-### 1. Diferencia técnica: API de Base de Datos vs. API de IA
-La lógica del servidor cambia radicalmente de un modelo **determinista** a uno **probabilístico**. Mientras que una API de base de datos busca y entrega datos exactos (Stateless), una API de IA como Gemini genera respuestas basadas en inferencia y requiere la gestión de una **ventana de contexto** masiva. El rendimiento se mide en **TTFT (Time To First Token)** debido a la generación secuencial.
-
-### 2. Seguridad: Vulnerabilidad de API Keys
-Exponer una API Key en el frontend permite su exfiltración inmediata. Este proyecto implementa un **Backend Proxy** que protege la llave en variables de entorno, evitando abusos financieros y suplantación de identidad.
-
-### 3. Herramientas: Google AI Studio
-Utilizamos **Google AI Studio** como el núcleo de prototipado para la ingeniería de prompts, permitiendo definir instrucciones de sistema precisas que dotan al chatbot de su identidad institucional.
-
----
-
-## 🛠️ Estructura del Proyecto
-
-El repositorio sigue un estándar de organización profesional:
-
-```
-build-with-ai/
-├── server.js              # Servidor Express (Proxy Seguro y OOP)
-├── public/                # Frontend (HTML5, CSS3, JS Vanilla)
-│   ├── index.html         # Interfaz de usuario (Material 3)
-│   ├── style.css          # Sistema de diseño y animaciones
-│   └── gemini-sparkle.png # Identidad visual de Gemini
-├── .env                   # Configuración de llaves (Oculto por seguridad)
-└── package.json           # Dependencias del ecosistema Node.js
-```
-
-### Tecnologías Destacadas:
-- **Backend:** Node.js, Express, Google Generative AI SDK.
-- **Frontend:** JavaScript Vanilla (ES6+), CSS Grid/Flexbox, Custom Properties.
-- **IA:** Gemini 3.0 Flash (Optimizado para velocidad y precisión).
+### Auditoría de IA (Académico)
+1. **Modelos Probabilísticos:** A diferencia de una base de datos tradicional, Gemini no "busca" información, la **genera** en base a patrones, lo que requiere un manejo de errores robusto ante posibles alucinaciones.
+2. **Protección de Assets:** El uso de un **Backend Proxy** es la única forma segura de implementar LLMs en la web, evitando que terceros roben la cuota de uso de la API Key.
+3. **Optimización de Prompting:** El sistema utiliza instrucciones de sistema (System Instructions) para garantizar que la IA se comporte como un representante oficial del ITCM.
 
 ---
 
-## 📥 Cómo Ejecutar el Proyecto
+## 🛠️ Despliegue y Configuración
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/jjho05/build-with-ai.git
-   ```
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
-3. **Configurar el entorno:**
-   Crea un archivo `.env` con tu `GEMINI_API_KEY`.
-4. **Iniciar servidor:**
-   ```bash
-   npm run dev
-   ```
+El proyecto está optimizado para **Vercel**.
+
+### Variables de Entorno Requeridas:
+- `GEMINI_API_KEY`: Tu llave privada de Google AI Studio.
+- `GOOGLE_SHEET_WEBHOOK_URL`: URL del script de Google Apps para el registro de datos.
+
+### Instalación Local:
+1. Clonar: `git clone https://github.com/jjho05/build-with-ai-itcm.git`
+2. Instalar: `npm install`
+3. Ejecutar: `npm run dev`
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autoría y Orgullo Madero
 
 **Jesús Olvera**  
-Estudiante de Ingeniería en Sistemas Computacionales  
-Instituto Tecnológico de Ciudad Madero
+Ingeniería en Sistemas Computacionales - ITCM  
+Líder de Proyecto | Arquitecto de Software
 
-- **Portal de la Carrera (ISC-ITCM):** [jjho05.github.io/ISC-ITCM/](https://jjho05.github.io/ISC-ITCM/)  
 - **GitHub:** [@jjho05](https://github.com/jjho05)
-- **Email:** [jjho.reivaj05@gmail.com](mailto:jjho.reivaj05@gmail.com)
+- **LinkedIn:** [Jesús Javier Hernández Olvera](https://www.linkedin.com/in/jjhernandezolvera/)
 
 ---
 
-**Por mi Patria y por mi Bien**  
-**Orgullo Tec Madero** 🦅
-
-©TecNM - Tecnológico Nacional de México  
-Instituto Tecnológico de Ciudad Madero
+**"Por mi Patria y por mi Bien"**  
+**Instituto Tecnológico de Ciudad Madero** 🦅  
+© 2026 - Proyecto de Excelencia Académica
