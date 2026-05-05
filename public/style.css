@@ -104,6 +104,17 @@ body {
     margin-left: 0.5rem;
 }
 
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-1px);
+}
+
 .nav-right {
     display: flex;
     align-items: center;
@@ -1201,5 +1212,75 @@ p, label, input, textarea, button {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
+    }
+}
+
+/* Footer Institucional */
+.footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 4rem 2rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-logo {
+    height: 24px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.footer-institution {
+    text-align: right;
+}
+
+.footer-institution p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.tagline {
+    font-style: italic;
+    color: var(--google-blue) !important;
+    margin-top: 0.25rem;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .footer-institution {
+        text-align: center;
     }
 }
