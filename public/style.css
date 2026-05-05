@@ -1409,18 +1409,23 @@ p, label, input, textarea, button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
+    gap: 4rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.footer-logo {
+    height: 32px; /* Google Logo height */
+    width: auto;
 }
 
 .itcm-logo {
-    height: 40px;
+    height: 60px; /* ITCM Logo larger */
     width: auto;
-    filter: grayscale(1) brightness(1.5);
-    transition: filter 0.3s;
+    filter: none;
+    transition: transform 0.3s ease;
 }
 
-.footer-logos:hover .itcm-logo {
-    filter: grayscale(0) brightness(1);
+.itcm-logo:hover {
+    transform: scale(1.05);
 }
