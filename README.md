@@ -151,21 +151,20 @@ El repositorio está organizado siguiendo los estándares de la industria para p
 
 ---
 
-## Créditos, Autoría y Compromiso Institucional
+## Autor
 
-Este proyecto representa el esfuerzo y la dedicación académica para elevar el nivel tecnológico de nuestra comunidad.
+**Jesús Olvera**  
+**Estudiante de Ingeniería en Sistemas Computacionales**  
+Instituto Tecnológico de Ciudad Madero
 
-**Desarrollador y Arquitecto:**  
-**Jesús Javier Hernández Olvera**  
-Estudiante de Ingeniería en Sistemas Computacionales  
-**Instituto Tecnológico de Ciudad Madero**
-
-- **Portal Institucional ISC-ITCM:** [jjho05.github.io/ISC-ITCM/](https://jjho05.github.io/ISC-ITCM/)  
-- **GitHub Oficial:** [@jjho05](https://github.com/jjho05)
-- **LinkedIn:** [Jesús Olvera](https://www.linkedin.com/in/jjhernandezolvera/)
+- **Portal de la Carrera (ISC-ITCM):** [jjho05.github.io/ISC-ITCM/](https://jjho05.github.io/ISC-ITCM/)  
+- **GitHub:** [@jjho05](https://github.com/jjho05)
+- **Email:** [jjho.reivaj05@gmail.com](mailto:jjho.reivaj05@gmail.com)
 
 ---
 
-**"Por mi Patria y por mi Bien"**  
-**Instituto Tecnológico de Ciudad Madero** 🦅  
-© 2026 - Tecnológico Nacional de México | ITCM
+**Por mi Patria y por mi Bien**  
+**Orgullo Tec Madero** 🦅
+
+© 2026 - Tecnológico Nacional de México  
+Instituto Tecnológico de Ciudad Madero
