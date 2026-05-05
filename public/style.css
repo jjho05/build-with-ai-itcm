@@ -1274,3 +1274,87 @@ p, label, input, textarea, button {
         flex-direction: column;
     }
 }
+
+/* Google Top Loader */
+.google-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 1000;
+    overflow: hidden;
+    background: transparent;
+    display: none;
+}
+
+.google-loader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        var(--google-blue) 0%, 
+        var(--google-red) 25%, 
+        var(--google-yellow) 50%, 
+        var(--google-green) 75%, 
+        var(--google-blue) 100%);
+    animation: google-loading 2s linear infinite;
+}
+
+@keyframes google-loading {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(50%); }
+}
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Share Buttons */
+.share-container {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text-main);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.share-btn:hover {
+    background: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.share-btn.whatsapp:hover { color: #25D366; border-color: #25D366; }
+.share-btn.twitter:hover { color: #1DA1F2; border-color: #1DA1F2; }
