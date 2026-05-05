@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { kv } = require('@vercel/kv');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -70,7 +71,7 @@ class AIRequestHandler {
 /**
  * Endpoint: Submit Proposal
  */
-app.post('/api/submit', (req, res) => {
+app.post('/api/submit', async (req, res) => {
     const { name, email, title, proposal } = req.body;
     const handler = new AIRequestHandler({ name, email, title, proposal });
     handler.sanitize();
@@ -82,10 +83,36 @@ app.post('/api/submit', (req, res) => {
         });
     }
 
+    const finalData = handler.getData();
+
+    // Persistencia en Vercel KV
+    try {
+        await kv.lpush('proposals', JSON.stringify(finalData));
+    } catch (kvError) {
+        console.error("KV Storage Error:", kvError);
+    }
+
     res.status(200).json({
-        message: "¡Propuesta validada! Listos para Gemini API.",
-        details: handler.getData()
+        message: "¡Propuesta recibida y guardada con éxito!",
+        details: finalData
     });
+});
+
+/**
+ * Endpoint: Admin View Proposals
+ */
+app.get('/api/admin/proposals', async (req, res) => {
+    const password = req.query.password;
+    if (password !== process.env.ADMIN_PASSWORD) {
+        return res.status(401).json({ error: "No autorizado." });
+    }
+
+    try {
+        const proposals = await kv.lrange('proposals', 0, -1);
+        res.json(proposals);
+    } catch (error) {
+        res.status(500).json({ error: "Error al recuperar propuestas." });
+    }
 });
 
 /**
@@ -95,7 +122,7 @@ app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
 
     if (!process.env.GEMINI_API_KEY) {
-        return res.status(500).json({ error: "API Key de Gemini no configurada en el servidor." });
+        return res.status(500).json({ error: "API Key de Gemini no configurada." });
     }
 
     try {

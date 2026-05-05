@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Build with AI ITCM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --google-blue: #4285F4;
+            --text-main: #1f1f1f;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+        }
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--google-blue);
+            margin-bottom: 2rem;
+        }
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        input {
+            padding: 0.75rem;
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            background: var(--google-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .proposal-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--google-blue);
+        }
+        .proposal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .author { font-weight: 700; color: var(--google-blue); }
+        .date { font-size: 0.85rem; color: #666; }
+        .title { font-size: 1.1rem; font-weight: 500; margin: 0.5rem 0; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Panel de Administración</h1>
+
+        <div id="login-section" class="login-box">
+            <p>Ingresa la contraseña maestra para ver las propuestas</p>
+            <input type="password" id="admin-pass" placeholder="Contraseña">
+            <br>
+            <button onclick="loadProposals()">Acceder</button>
+        </div>
+
+        <div id="proposals-list" class="hidden">
+            <!-- Propuestas aquí -->
+        </div>
+    </div>
+
+    <script>
+        async function loadProposals() {
+            const pass = document.getElementById('admin-pass').value;
+            const list = document.getElementById('proposals-list');
+            const login = document.getElementById('login-section');
+
+            try {
+                const response = await fetch(`/api/admin/proposals?password=${pass}`);
+                if (!response.ok) throw new Error("Contraseña incorrecta");
+                
+                const data = await response.json();
+                login.classList.add('hidden');
+                list.classList.remove('hidden');
+
+                if (data.length === 0) {
+                    list.innerHTML = "<p>No hay propuestas aún.</p>";
+                    return;
+                }
+
+                list.innerHTML = data.map(item => {
+                    const p = typeof item === 'string' ? JSON.parse(item) : item;
+                    return `
+                        <div class="proposal-card">
+                            <div class="proposal-header">
+                                <span class="author">${p.author} (${p.email})</span>
+                                <span class="date">${new Date(p.metadata.processedAt).toLocaleString()}</span>
+                            </div>
+                            <div class="title">${p.title}</div>
+                            <div class="content">${p.proposal}</div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+    </script>
+</body>
+</html>
