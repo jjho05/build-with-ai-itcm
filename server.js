@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { kv } = require('@vercel/kv');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -72,57 +71,55 @@ class AIRequestHandler {
  * Endpoint: Submit Proposal
  */
 app.post('/api/submit', async (req, res) => {
-    const { name, email, title, proposal } = req.body;
-    const handler = new AIRequestHandler({ name, email, title, proposal });
-    handler.sanitize();
-    const count = handler.calculateWordCount();
+    try {
+        const { name, email, title, proposal } = req.body;
+        const handler = new AIRequestHandler({ name, email, title, proposal });
+        handler.sanitize();
+        const count = handler.calculateWordCount();
 
-    if (!handler.isValid()) {
-        return res.status(400).json({
-            error: `La propuesta es demasiado corta (${count} palabras). Mínimo 10 palabras.`
+        if (!handler.isValid()) {
+            return res.status(400).json({
+                error: `La propuesta es demasiado corta (${count} palabras). Mínimo 10 palabras.`
+            });
+        }
+        console.log(`[PROPOSAL RECEIVED] From: ${handler.userEmail} - Title: ${handler.projectTitle}`);
+
+        // --- GOOGLE SHEETS INTEGRATION ---
+        const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+        if (webhookUrl) {
+            try {
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: handler.userName,
+                        email: handler.userEmail,
+                        title: handler.projectTitle,
+                        proposal: handler.sanitizedProposal
+                    })
+                });
+                console.log("✅ Data sent to Google Sheets");
+            } catch (sheetError) {
+                console.error("❌ Error sending to Google Sheets:", sheetError.message);
+            }
+        }
+
+        res.json({ 
+            message: `¡Gracias ${handler.userName}! Tu propuesta '${handler.projectTitle}' ha sido recibida. El comité del Instituto Tecnológico de Ciudad Madero la revisará pronto.`,
+            status: "Success"
         });
-    }
 
-    const finalData = handler.getData();
-
-    // Persistencia en Vercel KV
-    try {
-        await kv.lpush('proposals', JSON.stringify(finalData));
-    } catch (kvError) {
-        console.error("KV Storage Error:", kvError);
-    }
-
-    res.status(200).json({
-        message: "¡Propuesta recibida y guardada con éxito!",
-        details: finalData
-    });
-});
-
-/**
- * Endpoint: Admin View Proposals
- */
-app.get('/api/admin/proposals', async (req, res) => {
-    const password = req.query.password;
-    if (password !== process.env.ADMIN_PASSWORD) {
-        return res.status(401).json({ error: "No autorizado." });
-    }
-
-    try {
-        const proposals = await kv.lrange('proposals', 0, -1);
-        res.json(proposals);
-    } catch (error) {
-        res.status(500).json({ error: "Error al recuperar propuestas." });
+    } catch (err) {
+        res.status(500).json({ error: "Error interno al procesar la propuesta." });
     }
 });
 
-/**
- * Endpoint: Chat with Gemini
- */
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
 
     if (!process.env.GEMINI_API_KEY) {
-        return res.status(500).json({ error: "API Key de Gemini no configurada." });
+        return res.status(500).json({ error: "API Key de Gemini no configurada en el servidor." });
     }
 
     try {
