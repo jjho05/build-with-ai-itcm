@@ -4,16 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build with AI - Google Developers ITCM</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Propuestas de proyectos para la gira Build with AI 2026 en el ITCM. Únete a la revolución de la IA.">
-    <meta property="og:title" content="Build with AI - Gira ITCM 2026">
-    <meta property="og:description"
-        content="Envía tu propuesta de innovación y participa en los talleres oficiales de Google Developers.">
-    <meta property="og:image" content="https://gdg.community.dev/static/gdg_logo.png">
+    <title>Build with AI ITCM 2026 - Innovación Tecnológica</title>
+    <meta name="description" content="Participa en el evento tecnológico más importante del ITCM. Envía tu propuesta y potencia tu carrera con Google Gemini.">
+    <meta name="theme-color" content="#4285F4">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://build-with-ai-itcm.vercel.app/">
+    <meta property="og:title" content="Build with AI ITCM 2026">
+    <meta property="og:description" content="Propuestas de innovación con IA para la comunidad del Tecnológico de Ciudad Madero.">
+    <meta property="og:image" content="https://build-with-ai-itcm.vercel.app/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://build-with-ai-itcm.vercel.app/">
+    <meta property="twitter:title" content="Build with AI ITCM 2026">
+    <meta property="twitter:description" content="Propuestas de innovación con IA para la comunidad del Tecnológico de Ciudad Madero.">
+    <meta property="twitter:image" content="https://build-with-ai-itcm.vercel.app/og-image.png">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,6 +31,7 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 </head>
 
 <body>
@@ -244,7 +255,11 @@
             <h2>¡Propuesta recibida!</h2>
             <p>Tu idea ha sido enviada con éxito. Un asistente de Google Developers se pondrá en contacto contigo
                 pronto.</p>
-            <button id="close-modal" class="btn-submit">Entendido</button>
+            <button id="copy-proposal-btn" class="copy-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copiar mi propuesta
+            </button>
+            <button id="close-modal" class="btn-submit" style="margin-top: 1rem;">Entendido</button>
         </div>
     </div>
 
@@ -293,6 +308,11 @@
             </div>
             <div id="chat-messages" class="chat-messages">
                 <!-- Los mensajes se cargarán dinámicamente -->
+            </div>
+            <div class="chat-suggestions">
+                <button class="suggest-btn">¿Qué es Build with AI?</button>
+                <button class="suggest-btn">Ayúdame con mi propuesta</button>
+                <button class="suggest-btn">¿Cuándo es el evento?</button>
             </div>
             <form id="chat-form" class="chat-input-area">
                 <input type="text" id="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
@@ -426,7 +446,8 @@
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${type}`;
             if (type === 'ai') {
-                msgDiv.innerHTML = marked.parse(text);
+                const rawHTML = marked.parse(text);
+                msgDiv.innerHTML = DOMPurify.sanitize(rawHTML);
             } else {
                 msgDiv.textContent = text;
             }
@@ -470,6 +491,14 @@
                 typingIndicator.remove();
                 addMessage("Error al conectar con el servidor.", 'ai');
             }
+        });
+
+        // Suggestion Buttons Logic
+        document.querySelectorAll('.suggest-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                chatInput.value = btn.innerText;
+                chatForm.dispatchEvent(new Event('submit'));
+            });
         });
 
         // Form Logic
@@ -528,6 +557,7 @@
 
                 if (response.ok) {
                     responseMessage.className = 'response-message success';
+                    window.lastSubmittedProposal = textarea.value; // Store for copy
                     form.reset();
                     wordCountDisplay.textContent = '0 palabras';
                     showModal();
@@ -588,6 +618,21 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // Copy Proposal Logic
+        const copyBtn = document.getElementById('copy-proposal-btn');
+        copyBtn.addEventListener('click', () => {
+            const proposalText = window.lastSubmittedProposal || "";
+            navigator.clipboard.writeText(proposalText).then(() => {
+                const originalText = copyBtn.innerText;
+                copyBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> ¡Copiado!';
+                copyBtn.style.background = '#34A853';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copiar mi propuesta';
+                    copyBtn.style.background = '';
+                }, 2000);
+            });
+        });
+
         // AI Tips Rotation
         const tips = [
             "Explica cómo Gemini puede ayudar en tu idea.",
@@ -631,6 +676,14 @@
             originalReset();
             inputs.forEach(input => localStorage.removeItem(`draft_${input.id}`));
         };
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW Registered', reg))
+                    .catch(err => console.log('SW Registration Failed', err));
+            });
+        }
     </script>
 </body>
 

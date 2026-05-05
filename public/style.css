@@ -1358,3 +1358,48 @@ p, label, input, textarea, button {
 
 .share-btn.whatsapp:hover { color: #25D366; border-color: #25D366; }
 .share-btn.twitter:hover { color: #1DA1F2; border-color: #1DA1F2; }
+
+/* Chat Suggestions */
+.chat-suggestions {
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.suggest-btn {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.suggest-btn:hover {
+    border-color: var(--google-blue);
+    color: var(--google-blue);
+    background: rgba(66, 133, 244, 0.05);
+}
+
+/* Copy Button */
+.copy-btn {
+    background: var(--google-green);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.copy-btn:hover { opacity: 0.9; }

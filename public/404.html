@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Página no encontrada</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .error-container {
+            max-width: 500px;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1>¡Ups! Te has perdido</h1>
+        <p style="margin: 1.5rem 0; opacity: 0.8;">La página que buscas no existe o ha sido movida. Pero no te preocupes, el camino hacia la innovación sigue aquí.</p>
+        <a href="index.html" class="btn-submit" style="display: inline-block; text-decoration: none;">Volver al inicio</a>
+    </div>
+</body>
+</html>
