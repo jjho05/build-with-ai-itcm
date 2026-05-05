@@ -1403,3 +1403,24 @@ p, label, input, textarea, button {
 }
 
 .copy-btn:hover { opacity: 0.9; }
+
+/* Footer Logos */
+.footer-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.itcm-logo {
+    height: 40px;
+    width: auto;
+    filter: grayscale(1) brightness(1.5);
+    transition: filter 0.3s;
+}
+
+.footer-logos:hover .itcm-logo {
+    filter: grayscale(0) brightness(1);
+}
