@@ -18,18 +18,20 @@
 7. [Generación de Acceso Rápido (QR Code)](#generación-de-acceso-rápido-qr-code)
 8. [Arquitectura del Sistema y Flujo de Datos](#arquitectura-del-sistema-y-flujo-de-datos)
 9. [Ingeniería de Backend: Clase AIRequestHandler](#ingeniería-de-backend-clase-airequesthandler)
-10. [Ingeniería de Prompts (Prompt Engineering)](#ingeniería-de-prompts-prompt-engineering)
-11. [Auditoría Técnica: IA y Desarrollo Web Moderno](#auditoría-técnica-ia-y-desarrollo-web-moderno)
-12. [Seguridad y Hardening de la Aplicación](#seguridad-y-hardening-de-la-aplicación)
-13. [Optimización de Performance, SEO y QA](#optimización-de-performance-seo-y-qa)
-14. [Innovación en UI: Material Design 3 Floating Labels](#innovación-en-ui-material-design-3-floating-labels)
-15. [Sistema de Feedback Visual Institucional (Confetti)](#sistema-de-feedback-visual-institucional-confetti)
-16. [Sinergia Institucional y Branding](#sinergia-institucional-y-branding)
-17. [Estructura del Proyecto y Glosario](#estructura-del-proyecto-y-glosario)
-18. [Guía de Instalación, Configuración y Despliegue](#guía-de-instalación-configuración-y-despliegue)
-19. [Roadmap y Futuras Implementaciones](#roadmap-y-futuras-implementaciones)
-20. [Contribución y Licencia](#contribución-y-licencia)
-21. [Autor](#autor)
+10. [Análisis Cloud (Práctica Unidad 5)](#análisis-cloud-práctica-unidad-5)
+11. [Ingeniería de Prompts (Prompt Engineering)](#ingeniería-de-prompts-prompt-engineering)
+12. [Auditoría Técnica: IA y Desarrollo Web Moderno](#auditoría-técnica-ia-y-desarrollo-web-moderno)
+13. [Seguridad y Hardening de la Aplicación](#seguridad-y-hardening-de-la-aplicación)
+14. [Optimización de Performance, SEO y QA](#optimización-de-performance-seo-y-qa)
+15. [Innovación en UI: Material Design 3 Floating Labels](#innovación-en-ui-material-design-3-floating-labels)
+16. [Sistema de Feedback Visual Institucional (Confetti)](#sistema-de-feedback-visual-institucional-confetti)
+17. [Sinergia Institucional y Branding](#sinergia-institucional-y-branding)
+18. [Estructura del Proyecto y Glosario](#estructura-del-proyecto-y-glosario)
+19. [Guía de Instalación, Configuración y Despliegue](#guía-de-instalación-configuración-y-despliegue)
+20. [Roadmap y Futuras Implementaciones](#roadmap-y-futuras-implementaciones)
+21. [Análisis Cloud (Práctica Unidad 5)](#análisis-cloud-práctica-unidad-5)
+22. [Contribución y Licencia](#contribución-y-licencia)
+23. [Autor](#autor)
 
 ---
 
@@ -234,6 +236,29 @@ El footer de la plataforma ha sido rediseñado para representar la alianza estra
 - **Módulo de Realidad Aumentada para el acceso vía QR.**
 - **Integración con SIIT (Sistema Integral de Información Tecnológica) del ITCM.**
 - **Análisis de sentimiento avanzado en los mensajes de contacto.**
+
+---
+
+## Análisis Cloud (Práctica Unidad 5)
+
+En cumplimiento con los objetivos de la Unidad 5 sobre el despliegue y consumo de servicios en la nube, se presenta el siguiente análisis técnico del proyecto:
+
+### 1. Tipos de Servicio (5.2)
+La arquitectura de **Build with AI** utiliza los tres niveles de servicio en la nube para garantizar una operación escalable y robusta:
+- **SaaS (Software as a Service):** Consumimos la **API de Google Gemini (Google AI Studio)**. Este es un servicio SaaS donde Google nos entrega una capacidad de inteligencia lista para usar sin que tengamos que gestionar el modelo, el hardware o el entrenamiento.
+- **PaaS (Platform as a Service):** La aplicación está desplegada en **Vercel**. Vercel actúa como una plataforma que gestiona automáticamente el servidor, el escalado, los certificados SSL y el pipeline de despliegue desde GitHub, permitiéndonos enfocarnos exclusivamente en el código.
+- **IaaS (Infrastructure as a Service):** Aunque de forma indirecta, nuestra aplicación corre sobre la infraestructura global de **AWS o Google Cloud** (proveedores que Vercel utiliza por debajo). Estos proveen el cómputo, almacenamiento y redes físicas que sostienen todo el sistema.
+
+### 2. Estándares e Interoperabilidad (5.4)
+La comunicación entre nuestro servidor y la nube se rige por el estándar **JSON (JavaScript Object Notation)**:
+- **Formato de Intercambio:** Los datos viajan en objetos JSON, lo cual es el estándar de la industria para APIs RESTful debido a su ligereza y facilidad de lectura tanto para humanos como para máquinas.
+- **Interoperabilidad:** El uso de JSON permite que nuestro backend en Node.js se comunique sin fricciones con los servidores de Google AI Studio, independientemente de los lenguajes internos que ellos utilicen.
+
+### 3. Seguridad en la Nube (5.6)
+La protección de activos digitales es fundamental en entornos productivos:
+- **Variables de Entorno (.env):** Utilizamos archivos `.env` para almacenar credenciales sensibles (como `GEMINI_API_KEY`). Esto permite que el código sea agnóstico a las llaves y se comporte de forma segura en diferentes entornos (local vs producción).
+- **Protección en GitHub:** El archivo `.env` está incluido en nuestro `.gitignore`. Esto evita que las API Keys se suban al repositorio público, previniendo el robo de cuotas, cargos económicos no autorizados o acceso indebido a la IA.
+- **Configuración en PaaS:** En la plataforma de producción (Vercel), las llaves se configuran directamente en el panel de **Environment Variables**. De esta forma, el servidor de producción tiene acceso a la llave en memoria, pero esta nunca reside físicamente en el repositorio de código.
 
 ---
 
