@@ -1685,18 +1685,21 @@ p, label, input, textarea, button {
 .btn-qr-close {
     width: 100%;
     padding: 0.8rem;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    color: var(--text-main);
+    border-radius: 24px;
+    border: none;
+    background: var(--google-blue);
+    color: white;
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(60,64,67,0.3);
 }
 
 .btn-qr-close:hover {
-    background: var(--border);
-    border-color: var(--text-muted);
+    background: var(--btn-hover);
+    box-shadow: 0 4px 12px rgba(66,133,244,0.35);
+    transform: translateY(-1px);
 }
 
 /* Fix footer logos opacity and size */
@@ -1903,4 +1906,26 @@ p, label, input, textarea, button {
 .qr-footer-logos .mini-logo[alt="Google"]:hover {
     transform: scale(1.12);
     filter: drop-shadow(0 2px 6px rgba(66,133,244,0.4));
+}
+
+/* 🥚 Easter Egg — Google logos clicables (header + footer + QR) */
+.google-logo,
+.footer-logo[alt="Google"] {
+    transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+.google-logo:hover,
+.footer-logo[alt="Google"]:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 6px rgba(66,133,244,0.45));
+}
+
+/* Gemini sparkle — más visible en modo claro, natural en oscuro */
+:root .gemini-icon-img {
+    filter: brightness(0) saturate(100%) invert(30%) sepia(80%) saturate(600%) hue-rotate(210deg) brightness(90%);
+    opacity: 1;
+}
+
+[data-theme="dark"] .gemini-icon-img {
+    filter: none;
+    opacity: 0.95;
 }

@@ -452,6 +452,12 @@
             setDarkMode(!isDark);
         });
 
+        // 🥚 Easter Egg global: todos los logos de Google son clicables
+        document.querySelectorAll('.google-logo, .footer-logo[alt="Google"]').forEach(logo => {
+            logo.style.cursor = 'pointer';
+            logo.title = '🥚';
+            logo.addEventListener('click', () => window.open('https://google.com', '_blank'));
+        });
 
         // Scroll Progress & Back to Top Logic
         const scrollProgress = document.getElementById('scroll-progress');
