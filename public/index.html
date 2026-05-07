@@ -302,6 +302,7 @@
             </div>
             <div id="qr-modal" class="modal-overlay hidden">
                 <div class="modal-content qr-card">
+                    <!-- Header con franja de colores (vía ::before CSS) -->
                     <div class="qr-header">
                         <div class="google-dots">
                             <span class="dot blue"></span>
@@ -310,24 +311,32 @@
                             <span class="dot green"></span>
                         </div>
                         <h3>Invitación al Evento</h3>
+                        <p class="qr-subtitle">Build with AI · ITCM 2026</p>
                     </div>
-                    
+
+                    <!-- Cuerpo scrollable -->
                     <div class="qr-body">
                         <p class="qr-intro">Escanea este código para unirte a la gira <strong>Build with AI</strong> en el ITCM.</p>
                         <div class="qr-wrapper">
                             <div id="qrcode"></div>
                         </div>
                         <p class="qr-footer-text">¡Comparte la innovación con tus compañeros!</p>
+
+                        <!-- Logos integrados dentro del body -->
+                        <div class="qr-footer-logos">
+                            <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24dp.svg"
+                                 alt="Google" class="mini-logo"
+                                 onerror="this.style.display='none'">
+                            <div class="footer-divider"></div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Logo_del_ITCM.png"
+                                 alt="ITCM" class="mini-logo"
+                                 onerror="this.style.display='none'">
+                        </div>
                     </div>
 
-                    <div class="qr-footer-logos">
-                        <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24dp.svg" alt="Google" class="mini-logo">
-                        <div class="footer-divider"></div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Logo_del_ITCM.png" alt="ITCM" class="mini-logo itcm-original">
-                    </div>
-
+                    <!-- Botón sticky siempre visible al fondo -->
                     <div class="qr-actions">
-                        <button id="close-qr" class="btn-qr-close">Cerrar invitación</button>
+                        <button id="close-qr" class="btn-qr-close">✕ Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -336,8 +345,8 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logos">
-                <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" class="footer-logo">
-                <img src="logo-itcm.png" alt="ITCM" class="footer-logo itcm-logo">
+                <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" class="footer-logo" onerror="this.style.display='none'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Logo_del_ITCM.png" alt="ITCM" class="footer-logo itcm-logo" onerror="this.style.display='none'">
             </div>
             <div class="footer-links">
                 <a href="https://gdg.community.dev/" target="_blank">Google Developers</a>

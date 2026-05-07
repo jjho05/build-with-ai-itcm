@@ -1758,3 +1758,56 @@ p, label, input, textarea, button {
     from { opacity: 0; transform: scale(0.88) translateY(16px); }
     to   { opacity: 1; transform: scale(1) translateY(0); }
 }
+
+/* ==============================
+   QR Modal — Sticky Close Button Fix
+   ============================== */
+
+/* La tarjeta usa flex column para que el botón siempre quede al fondo */
+.qr-card {
+    display: flex !important;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden !important; /* La tarjeta no hace scroll */
+}
+
+/* Solo el body del QR hace scroll si el contenido es grande */
+.qr-body {
+    overflow-y: auto;
+    flex: 1;
+    padding: 1.5rem 2rem;
+}
+
+/* El botón de cerrar es sticky al fondo — SIEMPRE visible */
+.qr-actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg-color);
+    border-top: 1px solid var(--border);
+    padding: 1rem 2rem 1.5rem;
+    border-radius: 0 0 28px 28px;
+    flex-shrink: 0; /* Nunca se comprime */
+    z-index: 5;
+}
+
+/* Logos dentro del QR body sin opacidad */
+.qr-footer-logos {
+    margin-top: 1rem;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--border);
+}
+
+.mini-logo {
+    height: 20px;
+    opacity: 1 !important; /* Quitar la opacidad que los hacía ver transparentes */
+    max-width: 80px;
+    object-fit: contain;
+}
+
+/* Subtítulo del header QR */
+.qr-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    font-weight: 400;
+}
