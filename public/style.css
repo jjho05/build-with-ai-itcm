@@ -30,14 +30,23 @@
     --header-bg: rgba(26, 28, 30, 0.95);
 }
 
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transición enfocada SOLO en propiedades de tema */
+body,
+.navbar, .form-card, .modal-content, .chat-window,
+.faq-item, .footer, .timer-block, .share-btn,
+input, textarea, button, label,
+.qr-header, .qr-footer-logos, .qr-actions, .qr-body,
+.back-to-top, .feature-card {
+    transition:
+        background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Custom Scrollbar */
@@ -1697,4 +1706,55 @@ p, label, input, textarea, button {
 
 .mini-logo.itcm-original {
     filter: none; /* Ensure original color */
+}
+
+/* ==============================
+   QR Card Premium Enhancements
+   ============================== */
+
+/* Franja de colores Google en la parte superior del modal QR */
+.qr-card::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg,
+        var(--google-blue) 25%,
+        var(--google-red) 25% 50%,
+        var(--google-yellow) 50% 75%,
+        var(--google-green) 75%);
+    border-radius: 28px 28px 0 0;
+}
+
+/* Esquinas decorativas del contenedor QR */
+.qr-wrapper {
+    position: relative;
+}
+.qr-wrapper::before,
+.qr-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: var(--google-blue);
+    border-style: solid;
+    pointer-events: none;
+}
+.qr-wrapper::before {
+    top: 4px; left: 4px;
+    border-width: 3px 0 0 3px;
+    border-radius: 4px 0 0 0;
+}
+.qr-wrapper::after {
+    bottom: 4px; right: 4px;
+    border-width: 0 3px 3px 0;
+    border-radius: 0 0 4px 0;
+}
+
+/* Animación de entrada para todos los modales */
+.modal-overlay:not(.hidden) .modal-content {
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.88) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
 }
