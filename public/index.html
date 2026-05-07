@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
     <title>Build with AI ITCM 2026 - Innovación Tecnológica</title>
     <meta name="description" content="Participa en el evento tecnológico más importante del ITCM. Envía tu propuesta y potencia tu carrera con Google Gemini.">
     <meta name="theme-color" content="#4285F4">
@@ -461,6 +461,7 @@
 
         const showModal = () => {
             successModal.classList.remove('hidden');
+            if (backToTop) backToTop.style.display = 'none';
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -471,7 +472,14 @@
 
         closeModal.addEventListener('click', () => {
             successModal.classList.add('hidden');
+            if (backToTop) backToTop.style.display = 'flex';
         });
+        const closeQrActionsBtn = document.getElementById('close-qr');
+        if (closeQrActionsBtn) {
+            closeQrActionsBtn.addEventListener('click', () => {
+                if (backToTop) backToTop.style.display = 'flex';
+            });
+        }
         const closeChat = document.getElementById('close-chat');
         let chatInitialized = false;
 
@@ -737,6 +745,7 @@
 
         generateQrBtn.addEventListener('click', () => {
             qrModal.classList.remove('hidden');
+            document.getElementById('back-to-top').style.display = 'none'; // Ocultar flecha
             if (!qrGenerated) {
                 new QRCode(document.getElementById("qrcode"), {
                     text: window.location.href,
@@ -750,7 +759,10 @@
             }
         });
 
-        closeQrBtn.addEventListener('click', () => qrModal.classList.add('hidden'));
+        closeQrBtn.addEventListener('click', () => {
+            qrModal.classList.add('hidden');
+            document.getElementById('back-to-top').style.display = 'flex'; // Mostrar flecha
+        });
 
         // Copy Proposal Logic
         const copyBtn = document.getElementById('copy-proposal-btn');
