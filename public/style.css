@@ -138,7 +138,7 @@ body {
     font-weight: 600;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    transition: background-color 0.2s;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover {
@@ -157,7 +157,7 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-toggle:hover {
@@ -202,7 +202,7 @@ body {
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card:hover {
@@ -259,7 +259,7 @@ body {
     color: var(--text-muted);
     font-size: 0.9rem;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-links a:hover {
@@ -351,7 +351,7 @@ body {
     border-radius: 10px;
     background: var(--bg-color);
     color: var(--text-main);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
@@ -383,7 +383,7 @@ body {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s;
     margin-top: 1rem;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3);
 }
@@ -425,7 +425,9 @@ input, textarea {
     font-family: inherit;
     font-size: 1rem;
     color: var(--text-main);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 input:focus, textarea:focus {
@@ -451,7 +453,7 @@ input:focus, textarea:focus {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s;
     margin-top: 1rem;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3);
 }
@@ -714,7 +716,7 @@ input:focus, textarea:focus {
     border: none;
     border-bottom: 1px solid var(--border);
     border-radius: 0;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1) ease;
 }
 
 .faq-item:hover {
@@ -1261,7 +1263,7 @@ p, label, input, textarea, button {
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.2s;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-links a:hover {
@@ -1358,7 +1360,7 @@ p, label, input, textarea, button {
     color: var(--text-main);
     background: var(--card-bg);
     border: 1px solid var(--border);
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .share-btn:hover {
@@ -1388,7 +1390,7 @@ p, label, input, textarea, button {
     font-size: 0.75rem;
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
 }
 
@@ -1537,7 +1539,9 @@ p, label, input, textarea, button {
     font-size: 1rem;
     color: var(--text-main);
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .floating-group label {
@@ -1548,7 +1552,7 @@ p, label, input, textarea, button {
     font-size: 1rem;
     font-weight: 400;
     pointer-events: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--bg-color);
     padding: 0 4px;
 }
@@ -1678,7 +1682,7 @@ p, label, input, textarea, button {
     color: var(--text-main);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-qr-close:hover {
