@@ -34,7 +34,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Custom Scrollbar */
@@ -87,7 +90,8 @@ body {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    flex-shrink: 0;
 }
 
 .google-logo {
@@ -861,33 +865,34 @@ input:focus, textarea:focus {
 .back-to-top {
     position: fixed;
     bottom: 2rem;
-    left: 2rem;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--google-blue);
+    color: white;
     width: 45px;
     height: 45px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
     opacity: 0;
     visibility: hidden;
-    z-index: 1000;
-    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 90;
 }
 
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .back-to-top:hover {
-    color: var(--google-blue);
-    border-color: var(--google-blue);
-    transform: translateY(-5px);
+    background: var(--btn-hover);
+    transform: translateX(-50%) translateY(-5px);
 }
 
 /* Scroll Progress Bar */
@@ -1430,10 +1435,79 @@ p, label, input, textarea, button {
     transform: scale(1.05);
 }
 
-/* Floating Labels (Material Design 3) */
+/* Modal Improvements */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 24px;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+#qrcode canvas, #qrcode img {
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .logo-text {
+        font-size: 1.1rem;
+    }
+
+    .nav-right span {
+        display: none; /* Hide link text, show icons if any or just compact links */
+    }
+
+    .nav-right {
+        gap: 0.5rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+
+    .form-card {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+
+/* Restauración de Floating Labels (Material Design 3) */
 .floating-group {
     position: relative;
     padding-top: 12px;
+    margin-bottom: 1.5rem;
 }
 
 .floating-group input,
