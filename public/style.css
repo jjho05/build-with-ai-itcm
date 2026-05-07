@@ -1474,19 +1474,28 @@ p, label, input, textarea, button {
 /* Mobile Adjustments */
 @media (max-width: 600px) {
     .navbar {
-        padding: 0.75rem 1rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .google-logo {
+        height: 18px;
     }
 
     .logo-text {
-        font-size: 1.1rem;
-    }
-
-    .nav-right span {
-        display: none; /* Hide link text, show icons if any or just compact links */
+        font-size: 0.9rem;
+        white-space: nowrap;
+        letter-spacing: -0.5px;
+        padding-left: 0.5rem;
+        margin-left: 0.25rem;
     }
 
     .nav-right {
-        gap: 0.5rem;
+        gap: 0.4rem;
+    }
+
+    .nav-right a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
     }
 
     .modal-content {
