@@ -1637,3 +1637,41 @@ p, label, input, textarea, button {
         padding: 1rem;
     }
 }
+
+/* QR Card Actions & Polish */
+.qr-intro {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.qr-actions {
+    padding: 1.5rem;
+    background: var(--bg-color);
+}
+
+.btn-qr-close {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-qr-close:hover {
+    background: var(--border);
+    border-color: var(--text-muted);
+}
+
+/* Fix footer logos opacity and size */
+.qr-footer-logos {
+    opacity: 0.9;
+}
+
+.mini-logo.itcm-original {
+    filter: none; /* Ensure original color */
+}
