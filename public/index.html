@@ -781,36 +781,22 @@
                 qrGenerated = true;
             }
 
-            // Easter egg: logo de Google dentro del QR es clicable
-            const googleLogoInQr = qrModal.querySelector('.mini-logo[alt="Google"]');
-            if (googleLogoInQr && !googleLogoInQr.dataset.easterEgg) {
-                googleLogoInQr.dataset.easterEgg = 'true';
-                googleLogoInQr.style.cursor = 'pointer';
-                googleLogoInQr.title = '🥚 Powered by Google';
-                googleLogoInQr.addEventListener('click', () => {
-                    window.open('https://google.com', '_blank');
-                });
-            }
+            // Sin dead code de easter egg (logos removidos del modal)
         });
 
-        // Función de cierre con animación
+        // Cierre directo y confiable — sin clases de animación que conflictúan
         const closeQrModal = () => {
-            const card = qrModal.querySelector('.modal-content');
-            card.classList.add('closing');
-            setTimeout(() => {
-                qrModal.classList.add('hidden');
-                card.classList.remove('closing');
-                document.getElementById('back-to-top').style.display = 'flex';
-            }, 350);
+            qrModal.classList.add('hidden');
+            const bt = document.getElementById('back-to-top');
+            if (bt) bt.style.display = 'flex';
         };
 
         closeQrBtn.addEventListener('click', closeQrModal);
 
-        // También cerrar al hacer clic en el backdrop (fuera de la tarjeta)
+        // Cerrar al hacer clic en el backdrop
         qrModal.addEventListener('click', (e) => {
             if (e.target === qrModal) closeQrModal();
         });
-
 
         // Copy Proposal Logic
         const copyBtn = document.getElementById('copy-proposal-btn');
