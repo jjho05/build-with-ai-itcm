@@ -325,12 +325,9 @@
                         <!-- Logos integrados dentro del body -->
                         <div class="qr-footer-logos">
                             <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24dp.svg"
-                                 alt="Google" class="mini-logo"
-                                 onerror="this.style.display='none'">
+                                 alt="Google" class="mini-logo">
                             <div class="footer-divider"></div>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Logo_del_ITCM.png"
-                                 alt="ITCM" class="mini-logo"
-                                 onerror="this.style.display='none'">
+                            <img src="logo-itcm.png" alt="ITCM" class="mini-logo">
                         </div>
                     </div>
 
@@ -345,8 +342,8 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logos">
-                <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" class="footer-logo" onerror="this.style.display='none'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Logo_del_ITCM.png" alt="ITCM" class="footer-logo itcm-logo" onerror="this.style.display='none'">
+                <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" class="footer-logo">
+                <img src="logo-itcm.png" alt="ITCM" class="footer-logo itcm-logo">
             </div>
             <div class="footer-links">
                 <a href="https://gdg.community.dev/" target="_blank">Google Developers</a>
@@ -777,7 +774,9 @@
 
         generateQrBtn.addEventListener('click', () => {
             qrModal.classList.remove('hidden');
-            document.getElementById('back-to-top').style.display = 'none'; // Ocultar flecha
+            const card = qrModal.querySelector('.modal-content');
+            card.classList.remove('closing');
+            document.getElementById('back-to-top').style.display = 'none';
             if (!qrGenerated) {
                 new QRCode(document.getElementById("qrcode"), {
                     text: window.location.href,
@@ -789,12 +788,37 @@
                 });
                 qrGenerated = true;
             }
+
+            // Easter egg: logo de Google dentro del QR es clicable
+            const googleLogoInQr = qrModal.querySelector('.mini-logo[alt="Google"]');
+            if (googleLogoInQr && !googleLogoInQr.dataset.easterEgg) {
+                googleLogoInQr.dataset.easterEgg = 'true';
+                googleLogoInQr.style.cursor = 'pointer';
+                googleLogoInQr.title = '🥚 Powered by Google';
+                googleLogoInQr.addEventListener('click', () => {
+                    window.open('https://google.com', '_blank');
+                });
+            }
         });
 
-        closeQrBtn.addEventListener('click', () => {
-            qrModal.classList.add('hidden');
-            document.getElementById('back-to-top').style.display = 'flex'; // Mostrar flecha
+        // Función de cierre con animación
+        const closeQrModal = () => {
+            const card = qrModal.querySelector('.modal-content');
+            card.classList.add('closing');
+            setTimeout(() => {
+                qrModal.classList.add('hidden');
+                card.classList.remove('closing');
+                document.getElementById('back-to-top').style.display = 'flex';
+            }, 350);
+        };
+
+        closeQrBtn.addEventListener('click', closeQrModal);
+
+        // También cerrar al hacer clic en el backdrop (fuera de la tarjeta)
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) closeQrModal();
         });
+
 
         // Copy Proposal Logic
         const copyBtn = document.getElementById('copy-proposal-btn');
