@@ -321,14 +321,6 @@
                             <div id="qrcode"></div>
                         </div>
                         <p class="qr-footer-text">¡Comparte la innovación con tus compañeros!</p>
-
-                        <!-- Logos integrados dentro del body -->
-                        <div class="qr-footer-logos">
-                            <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24dp.svg"
-                                 alt="Google" class="mini-logo">
-                            <div class="footer-divider"></div>
-                            <img src="logo-itcm.png" alt="ITCM" class="mini-logo">
-                        </div>
                     </div>
 
                     <!-- Botón sticky siempre visible al fondo -->
@@ -509,12 +501,6 @@
             successModal.classList.add('hidden');
             if (backToTop) backToTop.style.display = 'flex';
         });
-        const closeQrActionsBtn = document.getElementById('close-qr');
-        if (closeQrActionsBtn) {
-            closeQrActionsBtn.addEventListener('click', () => {
-                if (backToTop) backToTop.style.display = 'flex';
-            });
-        }
         const closeChat = document.getElementById('close-chat');
         let chatInitialized = false;
 
