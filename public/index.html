@@ -300,8 +300,8 @@
                     QR
                 </button>
             </div>
-            <div id="qr-modal" class="modal-overlay hidden">
-                <div class="modal-content qr-card">
+            <dialog id="qr-modal" class="qr-dialog-native">
+                <div class="qr-card">
                     <!-- Header con franja de colores (vía ::before CSS) -->
                     <div class="qr-header">
                         <div class="google-dots">
@@ -328,7 +328,7 @@
                         <button id="close-qr" class="btn-qr-close">✕ Cerrar</button>
                     </div>
                 </div>
-            </div>
+            </dialog>
         </div>
 
     <footer class="footer">
@@ -765,9 +765,7 @@
         });
 
         generateQrBtn.addEventListener('click', () => {
-            qrModal.classList.remove('hidden');
-            const card = qrModal.querySelector('.modal-content');
-            card.classList.remove('closing');
+            qrModal.showModal();
             document.getElementById('back-to-top').style.display = 'none';
             if (!qrGenerated) {
                 new QRCode(document.getElementById("qrcode"), {
@@ -780,22 +778,29 @@
                 });
                 qrGenerated = true;
             }
-
-            // Sin dead code de easter egg (logos removidos del modal)
         });
 
-        // Cierre directo y confiable — sin clases de animación que conflictúan
+        // Cierre usando la API nativa de dialog
         const closeQrModal = () => {
-            qrModal.classList.add('hidden');
+            qrModal.close();
             const bt = document.getElementById('back-to-top');
             if (bt) bt.style.display = 'flex';
         };
 
         closeQrBtn.addEventListener('click', closeQrModal);
 
-        // Cerrar al hacer clic en el backdrop
+        // Cerrar al hacer clic en el backdrop nativo
         qrModal.addEventListener('click', (e) => {
-            if (e.target === qrModal) closeQrModal();
+            const rect = qrModal.getBoundingClientRect();
+            const inDialog = (
+                e.clientX >= rect.left &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom
+            );
+            if (!inDialog) {
+                closeQrModal();
+            }
         });
 
         // Copy Proposal Logic
