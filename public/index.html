@@ -769,7 +769,7 @@
             document.getElementById('back-to-top').style.display = 'none';
             if (!qrGenerated) {
                 new QRCode(document.getElementById("qrcode"), {
-                    text: window.location.href,
+                    text: "https://gdg.community.dev/events/details/google-gdg-cloud-mexico-city-presents-build-with-ai-week-gira-universitaria-sur-de-tamaulipas-2026/",
                     width: 200,
                     height: 200,
                     colorDark: "#202124",
@@ -861,12 +861,25 @@
             originalReset();
             inputs.forEach(input => localStorage.removeItem(`draft_${input.id}`));
         };
-        // Register Service Worker for PWA
+        // Register Service Worker for PWA with Auto-Update
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('SW Registered', reg))
+                    .then(reg => {
+                        console.log('SW Registered', reg);
+                        // Forzar al navegador a buscar una versión fresca del SW en Vercel
+                        reg.update();
+                    })
                     .catch(err => console.log('SW Registration Failed', err));
+
+                // Escuchar cuando el nuevo SW toma el control para recargar automáticamente la página (mata el caché viejo)
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        window.location.reload();
+                    }
+                });
             });
         }
     </script>

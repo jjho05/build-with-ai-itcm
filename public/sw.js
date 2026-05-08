@@ -1,4 +1,4 @@
-const CACHE_NAME = 'build-with-ai-v4';
+const CACHE_NAME = 'build-with-ai-v5';
 const ASSETS = [
   '/',
   '/index.html',
